@@ -25,8 +25,13 @@ class App extends Component {
   loadList = (todoListToLoad) => {
     this.setState({currentScreen: AppScreen.LIST_SCREEN});
     this.setState({currentList: todoListToLoad});
-    console.log("currentList: " + this.state.currentList);
-    console.log("currentScreen: " + this.state.currentScreen);
+    /*console.log("currentList: " + this.state.currentList);
+    console.log("currentScreen: " + this.state.currentScreen);*/
+  }
+
+  loadItem = (listItem) => {
+    this.setState({currentScreen: AppScreen.ITEM_SCREEN});
+
   }
 
   render() {

@@ -46,10 +46,10 @@ body {
 #list_heading {}
 #list_trash {
   position: absolute;
-  left: 85%;
-  width: 15%;
+  right: 0px;
+  /*width: 15%;*/
   text-align: right;
-  top: 5%;
+  top: 0px;
 }
 #list_details_container {
   padding-left: 2%;
