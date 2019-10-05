@@ -29,23 +29,27 @@ class App extends Component {
     console.log("currentScreen: " + this.state.currentScreen);*/
   }
 
+  // load item to edit
   loadItem = (listItem) => {
     this.setState({currentScreen: AppScreen.ITEM_SCREEN});
-
+    //this.setState({currentList: todoListToLoad});
   }
 
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
         return <HomeScreen 
-        loadList={this.loadList.bind(this)} 
-        todoLists={this.state.todoLists} />;
+          loadList={this.loadList.bind(this)} 
+          todoLists={this.state.todoLists} />;
       case AppScreen.LIST_SCREEN:            
         return <ListScreen
           goHome={this.goHome.bind(this)}
+          loadList={this.loadList.bind(this)}
           todoList={this.state.currentList} />;
       case AppScreen.ITEM_SCREEN:
-        return <ItemScreen />;
+        return <ItemScreen 
+          loadList={this.loadList.bind(this)}
+          todoList={this.state.currentList} />;
       default:
         return <div>ERROR</div>;
     }

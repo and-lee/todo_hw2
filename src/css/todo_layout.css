@@ -43,7 +43,9 @@ body {
 .home_list_link {}
 
 /* LIST SCREEN CONTROLS */
-#list_heading {}
+#list_heading {
+  display: inline;
+}
 #list_trash {
   position: absolute;
   right: 0px;
