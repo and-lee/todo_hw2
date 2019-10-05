@@ -4,8 +4,23 @@ import PropTypes from 'prop-types';
 export class ItemScreen extends Component {
     render() {
         return (
-            <div>
-                THIS HAS NOTHING SO FAR!
+            <div id="todo_item">
+                <h1 id="item_heading">Item</h1>
+                <div id="item_form_container">
+                    <div id="item_description_prompt" class="item_prompt">Description:</div>
+                    <input id="item_description_textfield" class="item_input" type="input" />
+                    <div id="item_assigned_to_prompt" class="item_prompt">Assigned To:</div>
+                    <input id="item_assigned_to_textfield" class="item_input" type="input" />
+                    <div id="item_due_date_prompt" class="item_prompt">Due Date:</div>
+                    <input id="item_due_date_picker" class="item_input" type="date" />
+                    <div id="item_completed_prompt" class="item_prompt">Completed:</div>
+                    <input id="item_completed_checkbox" class="item_input" type="checkbox" />
+
+                    <footer>
+                        <button id="item_form_submit_button" className="input_button item_button">Submit</button>
+                        <button id="item_form_cancel_button" className="input_button item_button">Cancel</button>
+                    </footer>
+                </div>
             </div>
         )
     }

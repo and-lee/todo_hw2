@@ -125,6 +125,7 @@ body {
 #item_heading {}
 #item_form_container {
   display: grid;
+  row-gap: 20px;
 }
 #item_description_prompt {}
 #item_description_textfield {}
@@ -133,14 +134,18 @@ body {
 #item_due_date_prompt {}
 #item_due_date_picker {}
 #item_completed_prompt {}
-#item_completed_checkbox {}
-#item_form_submit_button {}
-#item_form_cancel_button {}
+#item_completed_checkbox {
+  margin: 0;
+  width: 0;
+}
+#item_form_submit_button, #item_form_cancel_button {
+  margin-right: 10px;
+}
 
 /* ITEM SCREEN CLASSES */
 .item_prompt {
-  grid-column: 1 / 4;
+  grid-column: 1 / 2;
 }
 .item_input {
-  grid-column: 2 / 4;
+  grid-column: 2 / 7;
 }
