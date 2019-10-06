@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export class ListItemCard extends Component {
-    moveDown(listItem) {
+    moveDown(listItem, e) {
         var keyV = listItem.key;
         var next = this.props.todoList.items[listItem.key+1];
         //var temp = listItem;
@@ -13,6 +13,7 @@ export class ListItemCard extends Component {
 
         //load list
         this.props.loadList(this.props.todoList);
+        e.stopPropagation();
     }
     
     deleteItem(listItem) {
@@ -26,7 +27,7 @@ export class ListItemCard extends Component {
         this.props.loadList(this.props.todoList);
     }
     
-    moveUp(listItem) {
+    moveUp(listItem, e) {
         var keyV = listItem.key;
         var prev = this.props.todoList.items[listItem.key-1];
         this.props.todoList.items[listItem.key] = this.props.todoList.items[listItem.key-1];
@@ -37,6 +38,8 @@ export class ListItemCard extends Component {
 
         //load list
         this.props.loadList(this.props.todoList);
+        
+        e.stopPropagation();
     }
 
     render() {
@@ -55,11 +58,11 @@ export class ListItemCard extends Component {
                     <div className='list_item_card_not_completed'>Pending</div>}
 
                 <div className='list_item_card_toolbar'>
-                    {this.props.listItem.key==0 ? <div className={'list_item_card_button disabled'}>⇧</div> :
-                        <div className='list_item_card_button' onClick={() => this.moveUp(this.props.listItem)}>⇧</div>}
+                    {this.props.listItem.key==0 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇧</div> :
+                        <div className='list_item_card_button' onClick={e => this.moveUp(this.props.listItem, e)}>⇧</div>}
                     
-                    {this.props.listItem.key==this.props.todoList.items.length-1 ? <div className='list_item_card_button disabled'>⇩</div> :
-                        <div className='list_item_card_button' onClick={() => this.moveDown(this.props.listItem)}>⇩</div>}
+                    {this.props.listItem.key==this.props.todoList.items.length-1 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇩</div> :
+                        <div className='list_item_card_button' onClick={e => this.moveDown(this.props.listItem, e)}>⇩</div>}
                     
                     <div className='list_item_card_button'
                         onClick={() => this.deleteItem(this.props.listItem)}>✕</div>
