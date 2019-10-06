@@ -32,7 +32,6 @@ class App extends Component {
   // load item to edit
   loadItem = (listItem) => {
     this.setState({currentScreen: AppScreen.ITEM_SCREEN});
-    //this.setState({currentList: todoListToLoad});
   }
 
   render() {

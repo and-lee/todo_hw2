@@ -13,13 +13,6 @@
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
 }
 
-@font-face { /* FONT */
-  font-family: 'Lexend Exa';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lexend Exa Regular'), local('LexendExa-Regular'), url('/css/fonts/Lexend Exa/UMBXrPdOoHOnxExyjdBeaiLdA4M5.woff2') format('woff2');
-}
-
 body {
   background-color: var(--swatch-foundation);
   font-family: 'Lexend Exa';

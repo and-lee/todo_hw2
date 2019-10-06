@@ -99,7 +99,7 @@ export class ListItemsTable extends Component {
                     {this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_TASK_INCREASING) ? 
                         <div className="list_item_task_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_TASK_DECREASING)}>Task</div> : 
                         <div className="list_item_task_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_TASK_INCREASING)}>Task</div>
-                    }
+                    }                    
 
                     {this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING) ?
                         <div className="list_item_due_date_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_DUE_DATE_DECREASING)}>Due Date</div> : 
