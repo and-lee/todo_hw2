@@ -16,7 +16,7 @@ export class ListItemCard extends Component {
         e.stopPropagation();
     }
     
-    deleteItem(listItem) {
+    deleteItem(listItem, e) {
         this.props.todoList.items.splice(listItem.key, 1);
         //reassign key values
         for (let i = listItem.key; i < this.props.todoList.items.length; i++) {
@@ -25,6 +25,7 @@ export class ListItemCard extends Component {
 
         //load list
         this.props.loadList(this.props.todoList);
+        e.stopPropagation();
     }
     
     moveUp(listItem, e) {
@@ -65,7 +66,7 @@ export class ListItemCard extends Component {
                         <div className='list_item_card_button' onClick={e => this.moveDown(this.props.listItem, e)}>⇩</div>}
                     
                     <div className='list_item_card_button'
-                        onClick={() => this.deleteItem(this.props.listItem)}>✕</div>
+                        onClick={e => this.deleteItem(this.props.listItem, e)}>✕</div>
                 </div>
 
             </div>

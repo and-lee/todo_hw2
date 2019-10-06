@@ -18,7 +18,7 @@ export class ListScreen extends Component {
             let owner = this.props.todoList.owner;
             return this.props.todoList.owner;
         }
-    }
+    }    
     render() {
         return (
             <div id="todo_list">

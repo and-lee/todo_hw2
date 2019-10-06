@@ -17,8 +17,10 @@ export class ItemScreen extends Component {
                     <input id="item_completed_checkbox" class="item_input" type="checkbox" />
 
                     <footer>
-                        <button id="item_form_submit_button" className="input_button item_button">Submit</button>
-                        <button id="item_form_cancel_button" className="input_button item_button">Cancel</button>
+                        <button id="item_form_submit_button" className="input_button item_button"
+                            >Submit</button>
+                        <button id="item_form_cancel_button" className="input_button item_button"
+                            onClick={() => this.props.loadList(this.props.todoList)}>Cancel</button>
                     </footer>
                 </div>
             </div>
