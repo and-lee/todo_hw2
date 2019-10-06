@@ -20,6 +20,19 @@ export class ListScreen extends Component {
         }
     }
 
+    addItem() {
+        let newItem = {
+            "key": this.props.todoList.items.length,
+            "description": "",
+            "due_date": "",
+            "assigned_to": "",
+            "completed": false
+        }
+
+        this.props.todoList.items.push(newItem);
+        return newItem;
+    }
+
     render() {
         return (
             <div id="todo_list">
@@ -44,7 +57,7 @@ export class ListScreen extends Component {
                     </div>
                 </div>
                 <ListItemsTable todoList={this.props.todoList} loadList={this.props.loadList} loadItem={this.props.loadItem} />
-                <div className="list_item_add_card" onClick={() => this.props.loadItem()}>+</div>
+                <div className="list_item_add_card" onClick={() => this.props.loadItem(this.addItem())}>+</div>
             </div>
         )
     }

@@ -54,8 +54,8 @@ class App extends Component {
         return <ItemScreen 
           loadList={this.loadList.bind(this)}
           todoList={this.state.currentList}
-          listItem={this.state.currentItem}
-          loadItem={this.loadItem.bind(this)} />; //<delete?
+          listItem={this.state.currentItem} />;
+          //loadItem={this.loadItem.bind(this)} />;
       default:
         return <div>ERROR</div>;
     }
