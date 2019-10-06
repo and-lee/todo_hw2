@@ -14,7 +14,9 @@ class App extends Component {
   state = {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
-    currentList: null
+    currentList: null,
+
+    currentItem: null
   }
 
   goHome = () => {
@@ -32,6 +34,7 @@ class App extends Component {
   // load item to edit
   loadItem = (listItem) => {
     this.setState({currentScreen: AppScreen.ITEM_SCREEN});
+    this.setState({currentItem: listItem});
   }
 
   render() {
@@ -50,7 +53,9 @@ class App extends Component {
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
           loadList={this.loadList.bind(this)}
-          todoList={this.state.currentList} />;
+          todoList={this.state.currentList}
+          listItem={this.state.currentItem}
+          loadItem={this.loadItem.bind(this)} />; //<delete?
       default:
         return <div>ERROR</div>;
     }

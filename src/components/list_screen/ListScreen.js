@@ -18,7 +18,8 @@ export class ListScreen extends Component {
             let owner = this.props.todoList.owner;
             return this.props.todoList.owner;
         }
-    }    
+    }
+
     render() {
         return (
             <div id="todo_list">
@@ -43,6 +44,7 @@ export class ListScreen extends Component {
                     </div>
                 </div>
                 <ListItemsTable todoList={this.props.todoList} loadList={this.props.loadList} loadItem={this.props.loadItem} />
+                <div className="list_item_add_card" onClick={() => this.props.loadItem()}>+</div>
             </div>
         )
     }

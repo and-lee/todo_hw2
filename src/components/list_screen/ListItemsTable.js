@@ -14,6 +14,12 @@ export class ListItemsTable extends Component {
     state = {
         currentItemSortCriteria: ""
     }
+    constructor(props) {
+        super(props);
+    
+        this.compare = this.compare.bind(this);
+        this.isCurrentItemSortCriteria = this.isCurrentItemSortCriteria.bind(this);
+    }
 
     /**
      * This method sorts the todo list items according to the provided sorting criteria.
@@ -22,7 +28,7 @@ export class ListItemsTable extends Component {
      */
     sortTasks(sortingCriteria) {
         this.setState({currentItemSortCriteria: sortingCriteria}, function(){
-            this.props.todoList.items.sort(this.compare.bind(this));
+            this.props.todoList.items.sort(this.compare);
             //redo key values
             for (let i = 0; i < this.props.todoList.items.length; i++) {
                 this.props.todoList.items[i].key = i;
@@ -48,7 +54,6 @@ export class ListItemsTable extends Component {
      * @param {TodoListItem} item2 Second item to compare.
      */
     compare(item1, item2) {
-        this.isCurrentItemSortCriteria = this.isCurrentItemSortCriteria.bind(this);
         // IF IT'S A DECREASING CRITERIA SWAP THE ITEMS
         if (this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_TASK_DECREASING)
             || this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_STATUS_DECREASING)
@@ -91,7 +96,6 @@ export class ListItemsTable extends Component {
     }
     
     render() {
-        //this.isCurrentItemSortCriteria = this.isCurrentItemSortCriteria.bind(this);
         return (
             <div id="list_items_container">
                 <div className="list_item_header_card">
