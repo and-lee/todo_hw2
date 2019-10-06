@@ -164,7 +164,7 @@ body {
 /* ITEM SCREEN CONTROLS */
 #item_heading {
   font-weight: bold;
-  font-size: 24pt;
+  font-size: 16pt;
 }
 #item_form_container {}
 #item_description_prompt, #item_assigned_to_prompt, #item_due_date_prompt, #item_completed_prompt {

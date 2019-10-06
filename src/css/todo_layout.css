@@ -22,7 +22,10 @@ body {
   grid-row: 1 / span 2;
 }
 #home_your_lists_heading {}
-#home_your_lists_list {}
+#home_your_lists_list {
+  display: grid;
+  grid-row-gap: 20px;
+}
 #home_banner_container {
   grid-column: 2 / span 2;
   grid-row: 1 / span 1;
@@ -125,7 +128,7 @@ body {
 #item_heading {}
 #item_form_container {
   display: grid;
-  row-gap: 20px;
+  grid-row-gap: 20px;
 }
 #item_description_prompt {}
 #item_description_textfield {}

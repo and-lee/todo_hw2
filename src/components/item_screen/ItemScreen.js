@@ -5,7 +5,7 @@ export class ItemScreen extends Component {
     render() {
         return (
             <div id="todo_item">
-                <h1 id="item_heading">Item</h1>
+                <h3 id="item_heading">Item</h3>
                 <div id="item_form_container">
                     <div id="item_description_prompt" class="item_prompt">Description:</div>
                     <input id="item_description_textfield" class="item_input" type="input" />
