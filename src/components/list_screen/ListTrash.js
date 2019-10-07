@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 const Modal = ({show, handleClose, handleConfirm}) => {
     return (
-      <div className={show ? 'modal modal_is_visible' : 'modal modal_is_hidden'} id="modal_yes_no_dialog">
+      <div className={show ? 'modal modal_is_visible' : 'modal modal_is_hidden'} id="modal_yes_no_dialog" data-animation={show ? "slideInLeft" : "slideOutRight"}>
         <div class='modal_dialog'>
             <header class="dialog_header">
                 Delete list?
@@ -23,7 +23,7 @@ const Modal = ({show, handleClose, handleConfirm}) => {
 
 export class ListTrash extends Component {
     state = {
-        show: false // for modal
+        show: false // for modal. resets to hidden when on screen
     }
 
     showModal = () => {
@@ -40,7 +40,7 @@ export class ListTrash extends Component {
         for (let i = this.props.todoList.key; i < this.props.todoLists.length; i++) {
             this.props.todoLists[i].key = i;
         }
-
+          
         //go home
         this.props.goHome();
     }

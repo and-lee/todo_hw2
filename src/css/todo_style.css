@@ -203,9 +203,9 @@ body {
   justify-content: center;
   padding: 1rem;
   background: var(--black);
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
+  cursor: default;
+  /*visibility: hidden;
+  opacity: 0;*/
   transition: all 0.35s ease-in;
   z-index: 1;
 }
@@ -261,9 +261,16 @@ body {
   transition: all 0.5s var(--bounceEasing);
 }
 
-[data-animation].is_visible .modal_dialog {
+[data-animation].modal_is_visible .modal_dialog {
   opacity: 1;
   transition-delay: 0.2s;
+}
+
+[data-animation="slideInLeft"] .modal_dialog {
+  animation: slideInLeft 1s;
+}
+[data-animation="slideOutRight"] .modal_dialog {
+  animation: slideOutRight 1s;
 }
 
 [data-animation="slideInOutDown"] .modal_dialog {
@@ -291,17 +298,32 @@ body {
   transform: rotate(-1turn);
 }
 
-[data-animation="mixInAnimations"].is_visible .modal_dialog {
+[data-animation="mixInAnimations"] .is_visible .modal_dialog {
   animation: mixInAnimations 2s 0.2s linear forwards;
 }
 
-[data-animation="slideInOutDown"].is_visible .modal_dialog,
-[data-animation="slideInOutTop"].is_visible .modal_dialog,
-[data-animation="slideInOutLeft"].is_visible .modal_dialog,
-[data-animation="slideInOutRight"].is_visible .modal_dialog,
-[data-animation="zoomInOut"].is_visible .modal_dialog,
-[data-animation="rotateInOutDown"].is_visible .modal_dialog {
+[data-animation="slideInOutDown"] .is_visible .modal_dialog,
+[data-animation="slideInOutTop"] .is_visible .modal_dialog,
+[data-animation="slideInOutRight"] .is_visible .modal_dialog,
+[data-animation="slideInOutLeft"] .is_visible .modal_dialog,
+[data-animation="zoomInOut"] .is_visible .modal_dialog,
+[data-animation="rotateInOutDown"] .is_visible .modal_dialog {
   transform: none;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  } to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes mixInAnimations {
