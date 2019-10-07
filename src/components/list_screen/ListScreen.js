@@ -29,7 +29,7 @@ export class ListScreen extends Component {
             "completed": false
         }
 
-        this.props.todoList.items.push(newItem);
+        //this.props.todoList.items.push(newItem);
         return newItem;
     }
 
@@ -45,7 +45,7 @@ export class ListScreen extends Component {
         return (
             <div id="todo_list">
                 <ListHeading goHome={this.props.goHome} />
-                <ListTrash />
+                <ListTrash todoLists={this.props.todoLists} todoList={this.props.todoList} goHome={this.props.goHome}/>
                 <div id="list_details_container">
                     <div id="list_details_name_container" className="text_toolbar">
                         <span id="list_name_prompt">Name:</span>

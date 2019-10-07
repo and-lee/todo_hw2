@@ -76,6 +76,7 @@ export class ItemScreen extends Component {
                     <footer>
                         <button id="item_form_submit_button" className="input_button item_button" 
                             onClick={this.handleSubmit}>Submit</button>
+                        &nbsp;
                         <button id="item_form_cancel_button" className="input_button item_button"
                             onClick={() => this.props.loadList(this.props.todoList)}>Cancel</button>
                     </footer>

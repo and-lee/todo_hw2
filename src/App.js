@@ -15,7 +15,6 @@ class App extends Component {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
     currentList: null,
-
     currentItem: null
   }
 
@@ -49,7 +48,8 @@ class App extends Component {
           goHome={this.goHome.bind(this)}
           loadList={this.loadList.bind(this)}
           todoList={this.state.currentList} 
-          loadItem={this.loadItem.bind(this)} />;
+          loadItem={this.loadItem.bind(this)} 
+          todoLists={this.state.todoLists}/>;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
           loadList={this.loadList.bind(this)}

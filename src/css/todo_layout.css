@@ -141,9 +141,7 @@ body {
   margin: 0;
   width: 0;
 }
-#item_form_submit_button, #item_form_cancel_button {
-  margin-right: 10px;
-}
+#item_form_submit_button, #item_form_cancel_button {}
 
 /* ITEM SCREEN CLASSES */
 .item_prompt {
