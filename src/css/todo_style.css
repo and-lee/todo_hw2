@@ -164,18 +164,13 @@ body {
 /* ITEM SCREEN CONTROLS */
 #item_heading {
   font-weight: bold;
-  font-size: 16pt;
+  font-size: 14pt;
 }
 #item_form_container {}
-#item_description_prompt, #item_assigned_to_prompt, #item_due_date_prompt, #item_completed_prompt {
-
-}
-
+#item_description_prompt, #item_assigned_to_prompt, #item_due_date_prompt, #item_completed_prompt {}
 #item_description_textfield {}
 #item_assigned_to_textfield {}
-
 #item_due_date_picker {}
-
 #item_completed_checkbox {}
 
 #item_form_submit_button, #item_form_cancel_button {
@@ -197,7 +192,6 @@ body {
 }
 
 /* FOR A MODAL DIALOG */
-
 .modal { 
   position: fixed;
   top: 0;
@@ -231,7 +225,6 @@ body {
 }
 
 /*CUSTOM VARIABLES HERE*/
-
 .modal_dialog > * {
   padding: 1rem;
 }

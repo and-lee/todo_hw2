@@ -15,7 +15,7 @@ export class ListTrash extends Component {
 
     render() {
         return (
-            <main>
+            <>
                 <div class="modal" id="modal_yes_no_dialog" data-animation="slideInOutLeft" show={this.state.show} handleClose={this.hideModal}>
                     <div class="modal_dialog">
                         <header class="dialog_header">
@@ -33,7 +33,7 @@ export class ListTrash extends Component {
                 </div>
     
                 <div id="list_trash" onClick={() => this.showModal}>&#128465;</div>
-            </main>
+            </>
             
         )
     }
