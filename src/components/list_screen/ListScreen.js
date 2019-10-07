@@ -33,6 +33,14 @@ export class ListScreen extends Component {
         return newItem;
     }
 
+    nameHandler(e) {
+        if(e.target.value.trim()=="") {
+            this.props.todoList.name = "Unknown"; //"List "+(this.props.todoList.key+1);
+        } else {
+            this.props.todoList.name = e.target.value;
+        }
+    }
+
     render() {
         return (
             <div id="todo_list">
@@ -43,7 +51,7 @@ export class ListScreen extends Component {
                         <span id="list_name_prompt">Name:</span>
                         <input 
                             defaultValue={this.getListName()}
-                            onChange={e => this.props.todoList.name = e.target.value} 
+                            onChange={e => this.nameHandler(e)} 
                             type="text" 
                             id="list_name_textfield" />
                     </div>
