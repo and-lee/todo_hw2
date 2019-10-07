@@ -7,17 +7,19 @@ import PropTypes from 'prop-types';
 export class HomeScreen extends Component {
 
     newList() {
-        //this.props.todoList = this.props.todoLists[0];
         let newList = {
-            "key": this.props.todoLists.length,
+            "key": 0,
             "name": "Unknown",
             "owner": "Unknown",
             "items": []
         }
-        this.props.todoLists.push(newList);
-        return newList;
+        this.props.todoLists.unshift(newList);
         //redo keys
-        
+        for (let i = 0; i < this.props.todoLists.length; i++) {
+            this.props.todoLists[i].key = i;
+        }
+
+        return newList;
     }
 
     render() {
