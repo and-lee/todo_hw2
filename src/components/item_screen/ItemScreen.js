@@ -10,7 +10,7 @@ export class ItemScreen extends Component {
             description: this.props.listItem.description,
             assigned_to: this.props.listItem.assigned_to,
             due_date: this.props.listItem.due_date,
-            completed: this.props.listItem.completed
+            completed: this.props.listItem.completed,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,6 +41,10 @@ export class ItemScreen extends Component {
         this.props.listItem.assigned_to = this.state.assigned_to;
         this.props.listItem.due_date = this.state.due_date;
         this.props.listItem.completed = this.state.completed;
+        if(this.props.listItem.key==null) {
+            this.props.listItem.key = this.props.todoList.items.length;
+            this.props.todoList.items.push(this.props.listItem);
+        }
         this.props.loadList(this.props.todoList);
     }
 

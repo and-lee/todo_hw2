@@ -22,7 +22,7 @@ export class ListScreen extends Component {
 
     addItem() {
         let newItem = {
-            "key": this.props.todoList.items.length,
+            //"key": this.props.todoList.items.length,
             "description": "",
             "due_date": "",
             "assigned_to": "",
