@@ -10,7 +10,8 @@ class TodoListLinks extends Component {
                     <TodoListLink  
                         key={todoList.key}
                         loadList={this.props.loadList} 
-                        todoList={todoList} />
+                        todoList={todoList}
+                        todoLists={this.props.todoLists} />
                 ))}
             </div>
         );
