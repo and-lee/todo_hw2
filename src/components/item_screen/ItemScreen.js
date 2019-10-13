@@ -2,16 +2,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
 export class ItemScreen extends Component {
+    state = {
+        description: this.props.todoItem.description,
+        assigned_to: this.props.todoItem.assigned_to,
+        due_date: this.props.todoItem.due_date,
+        completed: this.props.todoItem.completed,
+    }
 
     constructor(props) {
         super(props);
     
-        this.state = {
-            description: this.props.listItem.description,
-            assigned_to: this.props.listItem.assigned_to,
-            due_date: this.props.listItem.due_date,
-            completed: this.props.listItem.completed,
-        }
+        /*this.state = {
+            description: this.props.todoItem.description,
+            assigned_to: this.props.todoItem.assigned_to,
+            due_date: this.props.todoItem.due_date,
+            completed: this.props.todoItem.completed,
+        }*/
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -37,13 +43,15 @@ export class ItemScreen extends Component {
         });
     }
     handleSubmit() {
-        this.props.listItem.description = this.state.description;
-        this.props.listItem.assigned_to = this.state.assigned_to;
-        this.props.listItem.due_date = this.state.due_date;
-        this.props.listItem.completed = this.state.completed;
-        if(this.props.listItem.key==null) {
-            this.props.listItem.key = this.props.todoList.items.length;
-            this.props.todoList.items.push(this.props.listItem);
+        this.props.todoItem.description = this.state.description;
+        this.props.todoItem.assigned_to = this.state.assigned_to;
+        this.props.todoItem.due_date = this.state.due_date;
+        this.props.todoItem.completed = this.state.completed;
+        if(this.props.todoItem.key==null) { // new item added
+            // assign key value
+            this.props.todoItem.key = this.props.todoList.items.length;
+
+            this.props.todoList.items.push(this.props.todoItem);
         }
         this.props.loadList(this.props.todoList);
     }
@@ -53,29 +61,29 @@ export class ItemScreen extends Component {
             <div id="todo_item">
                 <h3 id="item_heading">Item</h3>
                 <div id="item_form_container">
-                    <div id="item_description_prompt" class="item_prompt">Description:</div>
+                    <div id="item_description_prompt" className="item_prompt">Description:</div>
                     <input 
-                        defaultValue={this.props.listItem.description}
+                        defaultValue={this.props.todoItem.description}
                         onChange={e => this.updateDescription(e)}
-                        id="item_description_textfield" class="item_input" type="input" />
+                        id="item_description_textfield" className="item_input" type="input" />
                     
-                    <div id="item_assigned_to_prompt" class="item_prompt">Assigned To:</div>
+                    <div id="item_assigned_to_prompt" className="item_prompt">Assigned To:</div>
                     <input 
-                        defaultValue={this.props.listItem.assigned_to}
+                        defaultValue={this.props.todoItem.assigned_to}
                         onChange={e => this.updateAssignedTo(e)}
-                        id="item_assigned_to_textfield" class="item_input" type="input" />
+                        id="item_assigned_to_textfield" className="item_input" type="input" />
                     
-                    <div id="item_due_date_prompt" class="item_prompt">Due Date:</div>
+                    <div id="item_due_date_prompt" className="item_prompt">Due Date:</div>
                     <input 
-                        defaultValue={this.props.listItem.due_date}
+                        defaultValue={this.props.todoItem.due_date}
                         onChange={e => this.updateDueDate(e)}
-                        id="item_due_date_picker" class="item_input" type="date" />
+                        id="item_due_date_picker" className="item_input" type="date" />
                     
-                    <div id="item_completed_prompt" class="item_prompt">Completed:</div>
+                    <div id="item_completed_prompt" className="item_prompt">Completed:</div>
                     <input 
-                        defaultChecked={this.props.listItem.completed}
+                        defaultChecked={this.props.todoItem.completed}
                         onChange={e => this.updateCompleted(e)}
-                        id="item_completed_checkbox" class="item_input" type="checkbox" />
+                        id="item_completed_checkbox" className="item_input" type="checkbox" />
 
                     <footer>
                         <button id="item_form_submit_button" className="input_button item_button" 
@@ -91,7 +99,7 @@ export class ItemScreen extends Component {
 }
 
 ItemScreen.propTypes = {
-    currentScreen: PropTypes.string.isRequired,
+    currentScreen: PropTypes.string.isRequired, // not required...
     todoItem: PropTypes.object.isRequired
 }
 

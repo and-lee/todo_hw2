@@ -29,10 +29,7 @@ export class ListItemsTable extends Component {
     sortTasks(sortingCriteria) {
         this.setState({currentItemSortCriteria: sortingCriteria}, function(){
             this.props.todoList.items.sort(this.compare);
-            //redo key values
-            for (let i = 0; i < this.props.todoList.items.length; i++) {
-                this.props.todoList.items[i].key = i;
-            }
+            
             this.props.loadList(this.props.todoList);
         });
     }

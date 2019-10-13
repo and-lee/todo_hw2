@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 
 export class ListItemCard extends Component {
     moveDown(listItem, e) {
-        var keyV = listItem.key;
-        var next = this.props.todoList.items[listItem.key+1];
+        var index = this.props.todoList.items.indexOf(this.props.listItem);
+        //var next = this.props.todoList.items[index+1];
         //var temp = listItem;
-        this.props.todoList.items[listItem.key] = this.props.todoList.items[listItem.key+1];
-        this.props.todoList.items[listItem.key+1] = listItem;
-        //update key value
-        listItem.key = keyV+1;
-        next.key = keyV;
+        this.props.todoList.items[index] = this.props.todoList.items[index+1];
+        this.props.todoList.items[index+1] = listItem;
 
         //load list
         this.props.loadList(this.props.todoList);
@@ -17,9 +14,11 @@ export class ListItemCard extends Component {
     }
     
     deleteItem(listItem, e) {
-        this.props.todoList.items.splice(listItem.key, 1);
-        //reassign key values
-        for (let i = listItem.key; i < this.props.todoList.items.length; i++) {
+        var index = this.props.todoList.items.indexOf(this.props.listItem);
+        this.props.todoList.items.splice(index, 1);
+
+        // redo item keys
+        for (let i = 0; i < this.props.todoList.items.length; i++) {
             this.props.todoList.items[i].key = i;
         }
 
@@ -29,13 +28,10 @@ export class ListItemCard extends Component {
     }
     
     moveUp(listItem, e) {
-        var keyV = listItem.key;
-        var prev = this.props.todoList.items[listItem.key-1];
-        this.props.todoList.items[listItem.key] = this.props.todoList.items[listItem.key-1];
-        this.props.todoList.items[listItem.key-1] = listItem;
-        //update key value
-        listItem.key = keyV-1;
-        prev.key = keyV;
+        var index = this.props.todoList.items.indexOf(this.props.listItem);
+        //var prev = this.props.todoList.items[index-1];
+        this.props.todoList.items[index] = this.props.todoList.items[index-1];
+        this.props.todoList.items[index-1] = listItem;
 
         //load list
         this.props.loadList(this.props.todoList);
@@ -59,10 +55,10 @@ export class ListItemCard extends Component {
                     <div className='list_item_card_not_completed'>Pending</div>}
 
                 <div className='list_item_card_toolbar'>
-                    {this.props.listItem.key==0 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇧</div> :
+                    {this.props.todoList.items.indexOf(this.props.listItem)==0 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇧</div> :
                         <div className='list_item_card_button' onClick={e => this.moveUp(this.props.listItem, e)}>⇧</div>}
                     
-                    {this.props.listItem.key==this.props.todoList.items.length-1 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇩</div> :
+                    {this.props.todoList.items.indexOf(this.props.listItem)==this.props.todoList.items.length-1 ? <div className='list_item_card_button disabled' onClick={e=> e.stopPropagation()}>⇩</div> :
                         <div className='list_item_card_button' onClick={e => this.moveDown(this.props.listItem, e)}>⇩</div>}
                     
                     <div className='list_item_card_button'

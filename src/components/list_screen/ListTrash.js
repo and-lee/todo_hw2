@@ -3,17 +3,17 @@ import React, { Component } from 'react'
 const Modal = ({show, handleClose, handleConfirm}) => {
     return (
       <div className={show ? 'modal modal_is_visible' : 'modal modal_is_hidden'} id="modal_yes_no_dialog" data-animation={show ? "slideInLeft" : "slideOutRight"}>
-        <div class='modal_dialog'>
-            <header class="dialog_header">
+        <div className='modal_dialog'>
+            <header className="dialog_header">
                 Delete list?
             </header>
-            <section class="dialog_content">
+            <section className="dialog_content">
                 <p><strong>Are you sure you want to delete this list?</strong></p>
             </section>
             <button id="dialog_yes_button" onClick={handleConfirm}>Yes</button>
             &nbsp;
             <button id="dialog_no_button" onClick={handleClose}>No</button>
-            <footer class="dialog_footer">
+            <footer className="dialog_footer">
                 The list will not be retreivable.
             </footer>
         </div>
@@ -37,7 +37,7 @@ export class ListTrash extends Component {
     deleteList = () => {
         this.props.todoLists.splice(this.props.todoList.key, 1);
         //redo key values
-        for (let i = this.props.todoList.key; i < this.props.todoLists.length; i++) {
+        for (let i = 0; i < this.props.todoLists.length; i++) {
             this.props.todoLists[i].key = i;
         }
           

@@ -8,16 +8,12 @@ export class HomeScreen extends Component {
 
     newList() {
         let newList = {
-            "key": 0,
-            "name": "Unknown",
-            "owner": "Unknown",
+            "key": this.props.todoLists.length,
+            "name": "",
+            "owner": "",
             "items": []
         }
         this.props.todoLists.unshift(newList);
-        //redo keys
-        for (let i = 0; i < this.props.todoLists.length; i++) {
-            this.props.todoLists[i].key = i;
-        }
 
         return newList;
     }
