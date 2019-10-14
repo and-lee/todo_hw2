@@ -17,11 +17,6 @@ export class ListItemCard extends Component {
         var index = this.props.todoList.items.indexOf(this.props.listItem);
         this.props.todoList.items.splice(index, 1);
 
-        // redo item keys
-        for (let i = 0; i < this.props.todoList.items.length; i++) {
-            this.props.todoList.items[i].key = i;
-        }
-
         //load list
         this.props.loadList(this.props.todoList);
         e.stopPropagation();

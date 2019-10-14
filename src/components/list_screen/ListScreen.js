@@ -41,6 +41,8 @@ export class ListScreen extends Component {
         }
     }*/
 
+    //nameChange_Transaction(this, newName)
+
     render() {
         return (
             <div id="todo_list">

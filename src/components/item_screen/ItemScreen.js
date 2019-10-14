@@ -42,6 +42,16 @@ export class ItemScreen extends Component {
             completed: e.target.checked
         });
     }
+
+    newKey() {
+        for(let i =0; i<this.props.todoList.items.length; i++) {
+            if(this.props.todoList.items.find(function(item){return item.key==i})==null) {
+                return i;
+            }
+        }
+        return this.props.todoList.items.length;
+    }
+    
     handleSubmit() {
         this.props.todoItem.description = this.state.description;
         this.props.todoItem.assigned_to = this.state.assigned_to;
@@ -49,7 +59,8 @@ export class ItemScreen extends Component {
         this.props.todoItem.completed = this.state.completed;
         if(this.props.todoItem.key==null) { // new item added
             // assign key value
-            this.props.todoItem.key = this.props.todoList.items.length;
+            //this.props.todoItem.key = this.props.todoList.items.length;
+            this.props.todoItem.key = this.newKey();
 
             this.props.todoList.items.push(this.props.todoItem);
         }

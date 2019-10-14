@@ -5,10 +5,18 @@ import TodoListLinks from './TodoListLinks'
 import PropTypes from 'prop-types';
 
 export class HomeScreen extends Component {
+    newKey() {
+        for(let i =0; i<this.props.todoLists.length; i++) {
+            if(this.props.todoLists.find(function(item){return item.key==i})==null) {
+                return i;
+            }
+        }
+        return this.props.todoLists.length;
+    }
 
     newList() {
         let newList = {
-            "key": this.props.todoLists.length,
+            "key": this.newKey(),
             "name": "",
             "owner": "",
             "items": []

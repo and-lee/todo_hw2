@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 const Modal = ({show, handleClose, handleConfirm}) => {
     return (
-      <div className={show ? 'modal modal_is_visible' : 'modal modal_is_hidden'} id="modal_yes_no_dialog" data-animation={show ? "slideInLeft" : "slideOutRight"}>
+      <div className={show ? 'modal is_visible' : 'modal is_hidden'} id="modal_yes_no_dialog" data-animation={show ? "slideInLeft" : "slideOutRight"}>
         <div className='modal_dialog'>
             <header className="dialog_header">
                 Delete list?
@@ -35,11 +35,8 @@ export class ListTrash extends Component {
     }
 
     deleteList = () => {
-        this.props.todoLists.splice(this.props.todoList.key, 1);
-        //redo key values
-        for (let i = 0; i < this.props.todoLists.length; i++) {
-            this.props.todoLists[i].key = i;
-        }
+        var index = this.props.todoLists.indexOf(this.props.todoList);
+        this.props.todoLists.splice(index, 1);
           
         //go home
         this.props.goHome();
