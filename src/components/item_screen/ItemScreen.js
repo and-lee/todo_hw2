@@ -22,24 +22,24 @@ export class ItemScreen extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    updateDescription(e) {
+    updateDescription(descrip) {
         this.setState({
-            description: e.target.value
+            description: descrip
         });
     }
-    updateAssignedTo(e) {
+    updateAssignedTo(assign) {
         this.setState({
-            assigned_to: e.target.value
+            assigned_to: assign
         });
     }
-    updateDueDate(e) {
+    updateDueDate(date) {
         this.setState({
-            due_date: e.target.value
+            due_date: date
         });
     }
-    updateCompleted(e) {
+    updateCompleted(complete) {
         this.setState({
-            completed: e.target.checked
+            completed: complete
         });
     }
 
@@ -51,7 +51,7 @@ export class ItemScreen extends Component {
         }
         return this.props.todoList.items.length;
     }
-    
+
     handleSubmit() {
         this.props.todoItem.description = this.state.description;
         this.props.todoItem.assigned_to = this.state.assigned_to;
@@ -75,25 +75,25 @@ export class ItemScreen extends Component {
                     <div id="item_description_prompt" className="item_prompt">Description:</div>
                     <input 
                         defaultValue={this.props.todoItem.description}
-                        onChange={e => this.updateDescription(e)}
+                        onChange={e => this.updateDescription(e.target.value)}
                         id="item_description_textfield" className="item_input" type="input" />
                     
                     <div id="item_assigned_to_prompt" className="item_prompt">Assigned To:</div>
                     <input 
                         defaultValue={this.props.todoItem.assigned_to}
-                        onChange={e => this.updateAssignedTo(e)}
+                        onChange={e => this.updateAssignedTo(e.target.value)}
                         id="item_assigned_to_textfield" className="item_input" type="input" />
                     
                     <div id="item_due_date_prompt" className="item_prompt">Due Date:</div>
                     <input 
                         defaultValue={this.props.todoItem.due_date}
-                        onChange={e => this.updateDueDate(e)}
+                        onChange={e => this.updateDueDate(e.target.value)}
                         id="item_due_date_picker" className="item_input" type="date" />
                     
                     <div id="item_completed_prompt" className="item_prompt">Completed:</div>
                     <input 
                         defaultChecked={this.props.todoItem.completed}
-                        onChange={e => this.updateCompleted(e)}
+                        onChange={e => this.updateCompleted(e.target.checked)}
                         id="item_completed_checkbox" className="item_input" type="checkbox" />
 
                     <footer>

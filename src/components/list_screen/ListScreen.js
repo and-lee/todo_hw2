@@ -20,6 +20,13 @@ export class ListScreen extends Component {
         }
     }
 
+    setListName(name) {
+        this.props.todoList.name = name;
+    }
+    setListOwner(owner) {
+        this.props.todoList.owner = owner;
+    }
+
     addItem() {
         let newItem = {
             //"key": this.props.todoList.items.length,
@@ -53,7 +60,7 @@ export class ListScreen extends Component {
                         <span id="list_name_prompt">Name:</span>
                         <input 
                             defaultValue={this.getListName()}
-                            onChange={e => this.props.todoList.name = e.target.value} 
+                            onChange={e => this.setListName(e.target.value)} 
                             type="text" 
                             id="list_name_textfield" />
                     </div>
@@ -61,7 +68,7 @@ export class ListScreen extends Component {
                         <span id="list_owner_prompt">Owner:</span>
                         <input 
                             defaultValue={this.getListOwner()}
-                            onChange={e => this.props.todoList.owner = e.target.value}
+                            onChange={e => this.setListOwner(e.target.value)}
                             type="text" 
                             id="list_owner_textfield" />
                     </div>
