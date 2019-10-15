@@ -9,7 +9,7 @@
  * are called.
  * 
  */
-class jsTPS_Transaction {
+export default class jsTPS_Transaction {
     /**
      * This method is called by jsTPS when a transaction is executed.
      */

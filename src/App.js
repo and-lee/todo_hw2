@@ -4,6 +4,8 @@ import HomeScreen from './components/home_screen/HomeScreen'
 import ItemScreen from './components/item_screen/ItemScreen'
 import ListScreen from './components/list_screen/ListScreen'
 
+import jsTPS from './lib/jsTPS/jsTPS'
+
 const AppScreen = {
   HOME_SCREEN: "HOME_SCREEN",
   LIST_SCREEN: "LIST_SCREEN",
@@ -16,11 +18,37 @@ class App extends Component {
     todoLists: testTodoListData.todoLists,
     currentList: null,
     todoItem: null,
+
+    jsTPS: new jsTPS()
   }
+
+  /*
+  constructor(props) {
+    super(props);
+    //this.ctrlZYFunction = this.ctrlZYFunction.bind(this);
+    //this.undoTransaction = this.undoTransaction.bind(this);
+    //this.redoTransaction = this.redoTransaction.bind(this);
+  }*/
+  /*
+  ctrlZYFunction(event){ // key pressing input function
+    if(event.keyCode === 90 && event.ctrlKey) { //ctrl + z
+      this.undoTransaction();
+    } else if(event.keyCode === 89 && event.ctrlKey) { // ctrl + y
+      this.redoTransaction();
+    }
+  }
+  componentDidMount() {
+    document.addEventListener("keydown", this.ctrlZYFunction, false)
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.ctrlZYFunction, false);
+  }*/
 
   goHome = () => {
     this.setState({currentScreen: AppScreen.HOME_SCREEN});
     this.setState({currentList: null});
+    this.state.jsTPS.clearAllTransactions();
+    console.log(this.state.jsTPS.toString()); //
   }
 
   loadList = (todoListToLoad) => {
@@ -36,6 +64,16 @@ class App extends Component {
     this.setState({todoItem: listItem});
   }
 
+  /*undoTransaction() {
+    this.state.jsTPS.undoTransaction();
+    console.log(this.state.jsTPS.toString());
+  }
+
+  redoTransaction() {
+    this.state.jsTPS.doTransaction();
+    console.log(this.state.jsTPS.toString());
+  }*/
+
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
@@ -49,14 +87,14 @@ class App extends Component {
           loadList={this.loadList.bind(this)}
           todoList={this.state.currentList} 
           loadItem={this.loadItem.bind(this)} 
-          todoLists={this.state.todoLists} />;
+          todoLists={this.state.todoLists} 
+          jsTPS={this.state.jsTPS} />;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen 
           loadList={this.loadList.bind(this)}
           todoList={this.state.currentList}
           todoItem={this.state.todoItem} 
           currentScreen={this.state.currentScreen} />; // required
-          //loadItem={this.loadItem.bind(this)} />;
       default:
         return <div>ERROR</div>;
     }

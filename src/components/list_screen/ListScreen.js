@@ -4,7 +4,16 @@ import ListItemsTable from './ListItemsTable'
 import ListTrash from './ListTrash'
 import PropTypes from 'prop-types';
 
+import nameChange_Transaction from '../../lib/jsTPS/nameChange_Transaction'
+
 export class ListScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.ctrlZYFunction = this.ctrlZYFunction.bind(this);
+        //this.undoTransaction = this.undoTransaction.bind(this);
+        //this.redoTransaction = this.redoTransaction.bind(this);
+    }
+
     getListName() {
         if (this.props.todoList) {
             let name = this.props.todoList.name;
@@ -21,7 +30,15 @@ export class ListScreen extends Component {
     }
 
     setListName(name) {
+        if(this.getListName() == name) { // disable adding Transaction
+            //console.log("nothing happens");
+            return;
+        }
         this.props.todoList.name = name;
+
+        let transaction = new nameChange_Transaction(this.props.todoList, name);
+        this.props.jsTPS.addTransaction(transaction);
+        console.log(this.props.jsTPS.toString());
     }
     setListOwner(owner) {
         this.props.todoList.owner = owner;
@@ -40,15 +57,37 @@ export class ListScreen extends Component {
         return newItem;
     }
 
-    /*nameHandler(e) {
-        if(e.target.value.trim()=="") {
-            this.props.todoList.name = "Unknown"; //"List "+(this.props.todoList.key+1);
-        } else {
-            this.props.todoList.name = e.target.value;
+    ctrlZYFunction(event){ // key pressing input function
+        if(event.keyCode === 90 && event.ctrlKey) { //ctrl + z
+          this.undoTransaction();
+          event.preventDefault();
+        } else if(event.keyCode === 89 && event.ctrlKey) { // ctrl + y
+          this.redoTransaction();
+          event.preventDefault();
         }
-    }*/
+    }
+    componentDidMount() {
+        document.addEventListener("keydown", this.ctrlZYFunction, false);
+    }
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.ctrlZYFunction, false);
+    }
 
-    //nameChange_Transaction(this, newName)
+    undoTransaction() { // kick user out of text feild + change text field
+        if (document.getElementById("list_name_textfield") == document.activeElement){ //disable in textfield
+            return;
+        }
+        this.props.jsTPS.undoTransaction();
+        console.log(this.props.jsTPS.toString());
+    }
+    
+    redoTransaction() {
+        if (document.getElementById("list_name_textfield") == document.activeElement){ //disable in textfield
+            return;
+        }
+        this.props.jsTPS.doTransaction();
+        console.log(this.props.jsTPS.toString());
+    }
 
     render() {
         return (
@@ -60,7 +99,8 @@ export class ListScreen extends Component {
                         <span id="list_name_prompt">Name:</span>
                         <input 
                             defaultValue={this.getListName()}
-                            onChange={e => this.setListName(e.target.value)} 
+                            //onChange={e => this.setListName(e.target.value)}
+                            onBlur={e => this.setListName(e.target.value)}
                             type="text" 
                             id="list_name_textfield" />
                     </div>

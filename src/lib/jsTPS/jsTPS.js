@@ -7,7 +7,7 @@
  * transactions.
  * 
  */
-class jsTPS {
+export default class jsTPS {
     constructor() {
         // THE TRANSACTION STACK
         // arrays in js are dynamic

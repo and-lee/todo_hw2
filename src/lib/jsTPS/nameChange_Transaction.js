@@ -6,8 +6,9 @@
  * with all the data necessary to perform both do and undo.
  * 
  */
+import jsTPS_Transaction from './jsTPS_Transaction'
 
-class nameChange_Transaction extends jsTPS_Transaction {
+export default class nameChange_Transaction extends jsTPS_Transaction {
     /**
      * Constructor for this transaction, it initializes this
      * object with all the data needed to both do and undo
@@ -22,24 +23,22 @@ class nameChange_Transaction extends jsTPS_Transaction {
         this.list = initList;
 
         // name TO change FOR list name
-        this.name = initName;
+        this.newName = initName;
+        this.oldName = initList.name;
     }
 
     /**
      * This transaction changes the list name to new name.
      */
     doTransaction() {
-        let oldName = this.list.name; //this.list.getListName();
-        let newName = this.name;
-        this.list.name = newName;
+        this.list.name = this.newName;
     }
 
     /**
      * As the reverse of do, this method reverts list name to original name.
      */
     undoTransaction() {
-        let oldName = this.list.name;
-        this.list.name = oldName;
+        this.list.name = this.oldName;
     }
 
     /**
@@ -48,6 +47,6 @@ class nameChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Name Change " + this.name;
+        return "Name Change " + this.newName;
     }
 }
