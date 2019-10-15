@@ -5,6 +5,7 @@ import ListTrash from './ListTrash'
 import PropTypes from 'prop-types';
 
 import nameChange_Transaction from '../../lib/jsTPS/nameChange_Transaction'
+import ownerChange_Transaction from '../../lib/jsTPS/ownerChange_Transaction'
 
 export class ListScreen extends Component {
     constructor(props) {
@@ -12,6 +13,10 @@ export class ListScreen extends Component {
         this.ctrlZYFunction = this.ctrlZYFunction.bind(this);
         //this.undoTransaction = this.undoTransaction.bind(this);
         //this.redoTransaction = this.redoTransaction.bind(this);
+    }
+    state = {
+        name: this.props.todoList.name,
+        owner: this.props.todoList.owner
     }
 
     getListName() {
@@ -30,18 +35,18 @@ export class ListScreen extends Component {
     }
 
     setListName(name) {
-        if(this.getListName() == name) { // disable adding Transaction
+        /*if(this.getListName() == name) { // disable adding Transaction
             //console.log("nothing happens");
             return;
-        }
-        this.props.todoList.name = name;
-
+        }*/
         let transaction = new nameChange_Transaction(this.props.todoList, name);
         this.props.jsTPS.addTransaction(transaction);
-        console.log(this.props.jsTPS.toString());
+        this.setState({name: this.getListName()});
     }
     setListOwner(owner) {
-        this.props.todoList.owner = owner;
+        let transaction = new ownerChange_Transaction(this.props.todoList, owner);
+        this.props.jsTPS.addTransaction(transaction);
+        this.setState({owner: this.getListOwner()});
     }
 
     addItem() {
@@ -73,19 +78,15 @@ export class ListScreen extends Component {
         document.removeEventListener("keydown", this.ctrlZYFunction, false);
     }
 
-    undoTransaction() { // kick user out of text feild + change text field
-        if (document.getElementById("list_name_textfield") == document.activeElement){ //disable in textfield
-            return;
-        }
+    undoTransaction() {
         this.props.jsTPS.undoTransaction();
+        this.setState({name: this.getListName(), owner: this.getListOwner()});
         console.log(this.props.jsTPS.toString());
     }
     
     redoTransaction() {
-        if (document.getElementById("list_name_textfield") == document.activeElement){ //disable in textfield
-            return;
-        }
         this.props.jsTPS.doTransaction();
+        this.setState({name: this.getListName(), owner: this.getListOwner()});
         console.log(this.props.jsTPS.toString());
     }
 
@@ -98,16 +99,15 @@ export class ListScreen extends Component {
                     <div id="list_details_name_container" className="text_toolbar">
                         <span id="list_name_prompt">Name:</span>
                         <input 
-                            defaultValue={this.getListName()}
-                            //onChange={e => this.setListName(e.target.value)}
-                            onBlur={e => this.setListName(e.target.value)}
+                            value={this.state.name}
+                            onChange={e => this.setListName(e.target.value)}
                             type="text" 
                             id="list_name_textfield" />
                     </div>
                     <div id="list_details_owner_container" className="text_toolbar">
                         <span id="list_owner_prompt">Owner:</span>
                         <input 
-                            defaultValue={this.getListOwner()}
+                            value={this.state.owner}
                             onChange={e => this.setListOwner(e.target.value)}
                             type="text" 
                             id="list_owner_textfield" />

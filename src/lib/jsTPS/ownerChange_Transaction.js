@@ -1,5 +1,5 @@
 /**
- * nameChange_Transaction.java
+ * ownerChange_Transaction.java
  * 
  * This class is a transaction that can be executed and undone. It
  * can be stored in the jTPS transaction stack and must be constructed
@@ -8,37 +8,37 @@
  */
 import jsTPS_Transaction from './jsTPS_Transaction'
 
-export default class nameChange_Transaction extends jsTPS_Transaction {
+export default class ownerChange_Transaction extends jsTPS_Transaction {
     /**
      * Constructor for this transaction, it initializes this
      * object with all the data needed to both do and undo
      * the transaction.
      * 
      * @param initList
-     * @param initName
+     * @param initOwner
      */
-    constructor(initList, initName) { //initListName, 
+    constructor(initList, initOwner) { //initListName, 
         super();
         // THIS IS THE OBJECT IT WILL MANIPULATE
         this.list = initList;
 
-        // name TO change FOR list name
-        this.newName = initName;
-        this.oldName = initList.name;
+        // name TO change FOR list owner
+        this.newOwner = initOwner;
+        this.oldOwner = initList.owner;
     }
 
     /**
-     * This transaction changes the list name to new name.
+     * This transaction changes the list owner to new owner.
      */
     doTransaction() {
-        this.list.name = this.newName;
+        this.list.owner = this.newOwner;
     }
 
     /**
-     * As the reverse of do, this method reverts list name to original name.
+     * As the reverse of do, this method reverts list owner to original owner.
      */
     undoTransaction() {
-        this.list.name = this.oldName;
+        this.list.owner = this.oldOwner;
     }
 
     /**
@@ -47,6 +47,6 @@ export default class nameChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Name Change" + this.newName;
+        return "Owner Change" + this.newName;
     }
 }
