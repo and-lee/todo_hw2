@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import deleteItem_Transaction from '../../lib/jsTPS/deleteItem_Transaction'
+
 export class ListItemCard extends Component {
     moveDown(listItem, e) {
         var index = this.props.todoList.items.indexOf(this.props.listItem);
@@ -14,8 +16,11 @@ export class ListItemCard extends Component {
     }
     
     deleteItem(listItem, e) {
-        var index = this.props.todoList.items.indexOf(this.props.listItem);
-        this.props.todoList.items.splice(index, 1);
+        //var index = this.props.todoList.items.indexOf(this.props.listItem);
+        //this.props.todoList.items.splice(index, 1);
+        let transaction = new deleteItem_Transaction(this.props.todoList, listItem);
+        this.props.jsTPS.addTransaction(transaction);
+        console.log(this.props.jsTPS.toString());
 
         //load list
         this.props.loadList(this.props.todoList);

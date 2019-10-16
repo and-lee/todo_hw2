@@ -1,5 +1,5 @@
 /**
- * ownerChange_Transaction.java
+ * deleteItem_Transaction.java
  * 
  * This class is a transaction that can be executed and undone. It
  * can be stored in the jTPS transaction stack and must be constructed
@@ -8,37 +8,41 @@
  */
 import jsTPS_Transaction from './jsTPS_Transaction'
 
-export default class ownerChange_Transaction extends jsTPS_Transaction {
+export default class deleteItem_Transaction extends jsTPS_Transaction {
     /**
      * Constructor for this transaction, it initializes this
      * object with all the data needed to both do and undo
      * the transaction.
      * 
      * @param initList
-     * @param initOwner
+     * @param initItem
      */
-    constructor(initList, initOwner) { //initListName, 
+    constructor(initList, initItem) { //initListName, 
         super();
         // THIS IS THE OBJECT IT WILL MANIPULATE
         this.list = initList;
+        this.oldlist = initList.items;
 
-        // name TO change FOR list owner
-        this.newOwner = initOwner;
-        this.oldOwner = initList.owner;
+        this.item = initItem;
+        this.itemIndex = this.list.items.indexOf(initItem);
     }
 
     /**
-     * This transaction changes the list owner to new owner.
+     * This transaction deletes the item from the list.
      */
     doTransaction() {
-        this.list.owner = this.newOwner;
+        //this.list.items.splice(this.itemIndex, 1);
+        let item = this.item;
+        this.list.items = this.list.items.filter(function(i){return i!==item});
+
     }
 
     /**
-     * As the reverse of do, this method reverts list owner to original owner.
+     * As the reverse of do, this method reverts list to the original state.
      */
     undoTransaction() {
-        this.list.owner = this.oldOwner;
+        // add deleted item back into list
+        this.list.items = this.oldlist;
     }
 
     /**
@@ -47,6 +51,6 @@ export default class ownerChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Owner Change" + this.newOwner;
+        return "Delete Item" + this.item;
     }
 }

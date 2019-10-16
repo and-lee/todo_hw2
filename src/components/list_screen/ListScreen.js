@@ -64,11 +64,15 @@ export class ListScreen extends Component {
 
     ctrlZYFunction(event){ // key pressing input function
         if(event.keyCode === 90 && event.ctrlKey) { //ctrl + z
-          this.undoTransaction();
-          event.preventDefault();
+            this.props.jsTPS.undoTransaction();
+            this.setState({name: this.getListName(), owner: this.getListOwner()});
+            console.log(this.props.jsTPS.toString());
+            event.preventDefault();
         } else if(event.keyCode === 89 && event.ctrlKey) { // ctrl + y
-          this.redoTransaction();
-          event.preventDefault();
+            this.props.jsTPS.doTransaction();
+            this.setState({name: this.getListName(), owner: this.getListOwner()});
+            console.log(this.props.jsTPS.toString());
+            event.preventDefault();
         }
     }
     componentDidMount() {
@@ -76,18 +80,6 @@ export class ListScreen extends Component {
     }
     componentWillUnmount() {
         document.removeEventListener("keydown", this.ctrlZYFunction, false);
-    }
-
-    undoTransaction() {
-        this.props.jsTPS.undoTransaction();
-        this.setState({name: this.getListName(), owner: this.getListOwner()});
-        console.log(this.props.jsTPS.toString());
-    }
-    
-    redoTransaction() {
-        this.props.jsTPS.doTransaction();
-        this.setState({name: this.getListName(), owner: this.getListOwner()});
-        console.log(this.props.jsTPS.toString());
     }
 
     render() {
@@ -116,7 +108,8 @@ export class ListScreen extends Component {
                 <ListItemsTable 
                     todoList={this.props.todoList} 
                     loadList={this.props.loadList} 
-                    loadItem={this.props.loadItem} />
+                    loadItem={this.props.loadItem}
+                    jsTPS={this.props.jsTPS} />
                 <div className="list_item_add_card" onClick={() => this.props.loadItem(this.addItem())}>+</div>
             </div>
         )

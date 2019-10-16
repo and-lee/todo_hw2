@@ -120,7 +120,8 @@ export class ListItemsTable extends Component {
                             listItem={todoItem} 
                             todoList={this.props.todoList}
                             loadList={this.props.loadList}
-                            loadItem={this.props.loadItem} />
+                            loadItem={this.props.loadItem}
+                            jsTPS={this.props.jsTPS} />
                     ))
                 }
             </div>
