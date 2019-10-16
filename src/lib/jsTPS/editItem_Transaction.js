@@ -56,6 +56,6 @@ export default class editItem_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Edit Item " + this.item.description + " | " + this.item.assigned_to + " | " + this.item.due_date + " | " + this.item.completed ;
+        return "Edit Item " + this.item.description + " | " + this.item.assigned_to + " | " + this.item.due_date + " | " + this.item.completed;
     }
 }
