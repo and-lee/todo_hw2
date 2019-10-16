@@ -66,11 +66,13 @@ export class ListScreen extends Component {
         if(event.keyCode === 90 && event.ctrlKey) { //ctrl + z
             this.props.jsTPS.undoTransaction();
             this.setState({name: this.getListName(), owner: this.getListOwner()});
+            this.props.loadList(this.props.todoList);
             console.log(this.props.jsTPS.toString());
             event.preventDefault();
         } else if(event.keyCode === 89 && event.ctrlKey) { // ctrl + y
             this.props.jsTPS.doTransaction();
             this.setState({name: this.getListName(), owner: this.getListOwner()});
+            this.props.loadList(this.props.todoList);
             console.log(this.props.jsTPS.toString());
             event.preventDefault();
         }

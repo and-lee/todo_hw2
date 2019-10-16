@@ -17,7 +17,7 @@ export default class nameChange_Transaction extends jsTPS_Transaction {
      * @param initList
      * @param initName
      */
-    constructor(initList, initName) { //initListName, 
+    constructor(initList, initName) {
         super();
         // THIS IS THE OBJECT IT WILL MANIPULATE
         this.list = initList;
@@ -47,6 +47,6 @@ export default class nameChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Name Change" + this.newName;
+        return "Name Change " + this.newName;
     }
 }

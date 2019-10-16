@@ -17,7 +17,7 @@ export default class ownerChange_Transaction extends jsTPS_Transaction {
      * @param initList
      * @param initOwner
      */
-    constructor(initList, initOwner) { //initListName, 
+    constructor(initList, initOwner) {
         super();
         // THIS IS THE OBJECT IT WILL MANIPULATE
         this.list = initList;
@@ -47,6 +47,6 @@ export default class ownerChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Owner Change" + this.newOwner;
+        return "Owner Change " + this.newOwner;
     }
 }

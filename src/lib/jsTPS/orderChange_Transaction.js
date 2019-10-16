@@ -1,5 +1,5 @@
 /**
- * deleteItem_Transaction.java
+ * orderChange_Transaction.java
  * 
  * This class is a transaction that can be executed and undone. It
  * can be stored in the jTPS transaction stack and must be constructed
@@ -8,39 +8,39 @@
  */
 import jsTPS_Transaction from './jsTPS_Transaction'
 
-export default class deleteItem_Transaction extends jsTPS_Transaction {
+export default class orderChange_Transaction extends jsTPS_Transaction {
     /**
      * Constructor for this transaction, it initializes this
      * object with all the data needed to both do and undo
      * the transaction.
+     * initMoveBy = how much do you want to move the item down/up by
      * 
      * @param initList
      * @param initItem
+     * @param initMoveBy
      */
-    constructor(initList, initItem) {
+    constructor(initList, initItem, initMoveBy) {
         super();
         this.list = initList;
-        this.oldList = initList.items;
         this.item = initItem;
         this.itemIndex = this.list.items.indexOf(initItem);
+        this.moveBy = initMoveBy;
     }
 
     /**
-     * This transaction deletes the item from the list.
+     * This transaction moves the item up or down one on the list.
      */
     doTransaction() {
-        //this.list.items.splice(this.itemIndex, 1);
-        let item = this.item;
-        this.list.items = this.list.items.filter(function(i){return i!==item});
-
+        this.list.items[this.itemIndex] = this.list.items[this.itemIndex-this.moveBy];
+        this.list.items[this.itemIndex-this.moveBy] = this.item;
     }
 
     /**
-     * As the reverse of do, this method reverts list to the original state.
+     * As the reverse of do, this method reverts the item to its previous index.
      */
     undoTransaction() {
-        // add deleted item back into list
-        this.list.items = this.oldList;
+        this.list.items[this.itemIndex-this.moveBy] = this.list.items[this.itemIndex];
+        this.list.items[this.itemIndex] = this.item;
     }
 
     /**
@@ -49,6 +49,7 @@ export default class deleteItem_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Delete Item " + this.item;
+        
+        return "Order Change " + this.item.key;
     }
 }
