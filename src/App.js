@@ -94,7 +94,8 @@ class App extends Component {
           loadList={this.loadList.bind(this)}
           todoList={this.state.currentList}
           todoItem={this.state.todoItem} 
-          currentScreen={this.state.currentScreen} />; // required
+          currentScreen={this.state.currentScreen} //required
+          jsTPS={this.state.jsTPS} />;
       default:
         return <div>ERROR</div>;
     }

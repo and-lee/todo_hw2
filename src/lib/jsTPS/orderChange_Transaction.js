@@ -13,18 +13,18 @@ export default class orderChange_Transaction extends jsTPS_Transaction {
      * Constructor for this transaction, it initializes this
      * object with all the data needed to both do and undo
      * the transaction.
-     * initMoveBy = how much do you want to move the item down/up by
+     * moveBy = how much do you want to move the item down/up by
      * 
      * @param initList
      * @param initItem
-     * @param initMoveBy
+     * @param moveBy
      */
-    constructor(initList, initItem, initMoveBy) {
+    constructor(initList, initItem, moveBy) {
         super();
         this.list = initList;
         this.item = initItem;
         this.itemIndex = this.list.items.indexOf(initItem);
-        this.moveBy = initMoveBy;
+        this.moveBy = moveBy;
     }
 
     /**
@@ -49,7 +49,6 @@ export default class orderChange_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        
-        return "Order Change " + this.item.key;
+        return "Order Change " + this.itemIndex + " -> " +this.list.items.indexOf(this.item);
     }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
+import editItem_Transaction from '../../lib/jsTPS/editItem_Transaction'
+
 export class ItemScreen extends Component {
     state = {
         description: this.props.todoItem.description,
@@ -53,10 +55,13 @@ export class ItemScreen extends Component {
     }
 
     handleSubmit() {
-        this.props.todoItem.description = this.state.description;
+        /*this.props.todoItem.description = this.state.description;
         this.props.todoItem.assigned_to = this.state.assigned_to;
         this.props.todoItem.due_date = this.state.due_date;
-        this.props.todoItem.completed = this.state.completed;
+        this.props.todoItem.completed = this.state.completed;*/
+        let transaction = new editItem_Transaction(this.props.todoItem, this.state.description, this.state.assigned_to, this.state.due_date, this.state.completed);
+        this.props.jsTPS.addTransaction(transaction);
+
         if(this.props.todoItem.key==null) { // new item added
             // assign key value
             //this.props.todoItem.key = this.props.todoList.items.length;

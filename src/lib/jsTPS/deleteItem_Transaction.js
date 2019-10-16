@@ -36,7 +36,7 @@ export default class deleteItem_Transaction extends jsTPS_Transaction {
     }
 
     /**
-     * As the reverse of do, this method reverts list to the original state.
+     * As the reverse of do, this method reverts the list to its original state.
      */
     undoTransaction() {
         // add deleted item back into list
@@ -49,6 +49,6 @@ export default class deleteItem_Transaction extends jsTPS_Transaction {
      * @return A string storing a textual summary of this object.
      */
     toString() {
-        return "Delete Item " + this.item;
+        return "Delete Item " + this.item.description + " | " + this.item.assigned_to + " | " + this.item.due_date + " | " + this.item.completed ;
     }
 }

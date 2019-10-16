@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ListItemCard from './ListItemCard'
 
+import sortList_Transaction from '../../lib/jsTPS/sortList_Transaction'
+
 const ItemSortCriteria = {
     SORT_BY_TASK_INCREASING: "sort_by_task_increasing",
     SORT_BY_TASK_DECREASING: "sort_by_task_decreasing",
@@ -28,8 +30,12 @@ export class ListItemsTable extends Component {
      */
     sortTasks(sortingCriteria) {
         this.setState({currentItemSortCriteria: sortingCriteria}, function(){
-            this.props.todoList.items.sort(this.compare);
-            
+            //this.props.todoList.items.sort(this.compare);
+
+            // add transaction
+            let transaction = new sortList_Transaction(this.props.todoList, this.compare);
+            this.props.jsTPS.addTransaction(transaction);
+
             this.props.loadList(this.props.todoList);
         });
     }
@@ -88,30 +94,40 @@ export class ListItemsTable extends Component {
                 return 1;
             else
                 return 0;
+        }    
+    }
+
+    taskSort() {
+        if(this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_TASK_INCREASING)) {
+            this.sortTasks(ItemSortCriteria.SORT_BY_TASK_DECREASING);
+        } else {
+            this.sortTasks(ItemSortCriteria.SORT_BY_TASK_INCREASING);
         }
-        
+    }
+
+    dueDateSort() {
+        if(this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING)) {
+            this.sortTasks(ItemSortCriteria.SORT_BY_DUE_DATE_DECREASING);
+        } else {
+            this.sortTasks(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING);
+        }
+    }
+
+    statusSort() {
+        if(this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_STATUS_INCREASING)) {
+            this.sortTasks(ItemSortCriteria.SORT_BY_STATUS_DECREASING);
+        } else {
+            this.sortTasks(ItemSortCriteria.SORT_BY_STATUS_INCREASING);
+        }
     }
     
     render() {
         return (
             <div id="list_items_container">
                 <div className="list_item_header_card">
-
-                    {this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_TASK_INCREASING) ? 
-                        <div className="list_item_task_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_TASK_DECREASING)}>Task</div> : 
-                        <div className="list_item_task_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_TASK_INCREASING)}>Task</div>
-                    }                    
-
-                    {this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING) ?
-                        <div className="list_item_due_date_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_DUE_DATE_DECREASING)}>Due Date</div> : 
-                        <div className="list_item_due_date_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_DUE_DATE_INCREASING)}>Due Date</div>
-                    }
-                    
-                    {this.isCurrentItemSortCriteria(ItemSortCriteria.SORT_BY_STATUS_INCREASING) ?
-                        <div className="list_item_status_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_STATUS_DECREASING)}>Status</div> : 
-                        <div className="list_item_status_header" onClick={() => this.sortTasks(ItemSortCriteria.SORT_BY_STATUS_INCREASING)}>Status</div>
-                    }
-                    
+                    <div className="list_item_task_header" onClick={() => this.taskSort()}>Task</div>
+                    <div className="list_item_due_date_header" onClick={() => this.dueDateSort()}>Due Date</div>
+                    <div className="list_item_status_header" onClick={() => this.statusSort()}>Status</div>
                 </div>
                 {
                     this.props.todoList.items.map((todoItem)=>(
