@@ -20,7 +20,6 @@ export default class deleteItem_Transaction extends jsTPS_Transaction {
     constructor(initList, initItem) {
         super();
         this.list = initList;
-        this.oldList = initList.items;
         this.item = initItem;
         this.itemIndex = this.list.items.indexOf(initItem);
     }
@@ -29,18 +28,15 @@ export default class deleteItem_Transaction extends jsTPS_Transaction {
      * This transaction deletes the item from the list.
      */
     doTransaction() {
-        //this.list.items.splice(this.itemIndex, 1);
-        let item = this.item;
-        this.list.items = this.list.items.filter(function(i){return i!==item});
-
+        this.list.items.splice(this.itemIndex, 1);
     }
 
     /**
      * As the reverse of do, this method reverts the list to its original state.
      */
     undoTransaction() {
-        // add deleted item back into list
-        this.list.items = this.oldList;
+        // insert deleted item back into the list
+        this.list.items.splice(this.itemIndex, 0, this.item);
     }
 
     /**
