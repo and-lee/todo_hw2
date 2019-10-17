@@ -36,8 +36,7 @@ export default class addItem_Transaction extends jsTPS_Transaction {
      */
     undoTransaction() {
         // remove item
-        let item = this.item;
-        this.list.items = this.list.items.filter(function(i){return i!==item});
+        this.list.items.splice(this.itemIndex, 1);
     }
 
     /**
