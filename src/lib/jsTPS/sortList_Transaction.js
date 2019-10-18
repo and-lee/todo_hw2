@@ -49,7 +49,7 @@ export default class sortList_Transaction extends jsTPS_Transaction {
      * This transaction sorts the items in the list.
      */
     doTransaction() {
-        for (let i = 0; i < this.oldList.length; i++) {
+        /*for (let i = 0; i < this.oldList.length; i++) {
             this.oldList[i] = ({
                 key: this.list.items[i].key,
                 description: this.list.items[i].description,
@@ -57,7 +57,7 @@ export default class sortList_Transaction extends jsTPS_Transaction {
                 assigned_to: this.list.items[i].assigned_to,
                 completed: this.list.items[i].completed
             });
-        }
+        }*/
 
         //this.newList.sort(this.compare);
         for (let i = 0; i < this.newList.length; i++) {
@@ -72,7 +72,6 @@ export default class sortList_Transaction extends jsTPS_Transaction {
 
         //this.list.items.sort(this.compare);
 
-        console.log(this.newList);
     }
 
     /**
@@ -90,7 +89,6 @@ export default class sortList_Transaction extends jsTPS_Transaction {
             });
         }
 
-        console.log(this.list.items);
     }
 
     /**
